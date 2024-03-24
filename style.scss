@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  --cellin-size: 267px;
+  --mark-size: calc(var(--cellin-size) * 0.3);
+}
+body {
+  background-color: #155263;
+
+  main {
+    position: fixed;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+
+    //top text to see who's turn it is
+    #text {
+      border: 2px solid orange;
+      border-top: none;
+      width: 798px;
+      height: 70px;
+      left: 23%;
+      position: fixed;
+      top: 0;
+      text-align: center;
+      color: #ffc93c;
+      font-size: 3rem;
+    }
+
+    // parent with the text winning mesage and the restart button
+    .winning-message-and-button {
+      display: none;
+      z-index: 20;
+      position: fixed;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      bottom: 0;
+      left: -155px;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+
+      // text with winning mesage
+      div:nth-child(1) {
+        color: #ffc93c;
+        font-size: 72px;
+        line-height: 0.3;
+        font-weight: 700;
+        position: absolute;
+        top: 350px;
+      }
+      // restart button
+      #restartButton {
+        background-color: #155263;
+        border-color: #ffc93c;
+        color: #ffc93c;
+        padding: 14px 28px;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 3rem;
+        border-radius: 10% / 40%;
+        &:hover {
+          border-color: orange;
+          color: orange;
+        }
+      }
+    }
+    // show class to make it available
+    .winning-message-and-button.show {
+      display: flex;
+    }
+
+    // board containing the positions A1.. and the cell's
+    .container {
+      display: grid;
+      grid-template-columns: 40px repeat(3, 1fr);
+      grid-template-rows: 40px repeat(3, 1fr);
+      width: calc(100vh - 80px);
+      max-width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      justify-items: center;
+
+      // represents the actual cell to be clicked
+      .cellin {
+        cursor: pointer;
+        width: var(--cellin-size);
+        height: var(--cellin-size);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border-right: 1px solid;
+        border-bottom: 1px solid;
+        color: #ffc93c;
+        font-size: 80px;
+      }
+      .cellin:nth-child(6) {
+        border-left: 1px solid;
+        border-top: 1px solid;
+      }
+      .cellin:nth-child(7),
+      .cellin:nth-child(8) {
+        border-top: 1px solid;
+      }
+      .cellin:nth-child(10),
+      .cellin:nth-child(14) {
+        border-left: 1px solid;
+      }
+
+
+      // mark X
+      .cellin.X::before,
+      .cellin.X::after {
+        content: "";
+        position: absolute;
+        width: calc(var(--mark-size) * 0.1);
+        height: var(--mark-size);
+        background-color: #ffc93c;
+      }
+
+      .cellin.X::before {
+        transform: rotate(45deg);
+      }
+      .cellin.X::after {
+        transform: rotate(-45deg);
+      }
+
+      // mark O
+      .cellin.O::before,
+      .cellin.O::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background-color: #ffc93c;
+      }
+
+      .cellin.O::before {
+        width: var(--mark-size);
+        height: var(--mark-size);
+        background-color: #ffc93c;
+      }
+      .cellin.O::after {
+        width: calc(var(--mark-size) * 0.8);
+        height: calc(var(--mark-size) * 0.8);
+        background-color: #155263;
+      }
+
+      // cells containing the coordinates for the x and o
+      .cellout {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: orange;
+        font-size: 20px;
+        font-family: "Poppins", sans-serif;
+      }
+    }
+  }
+}
